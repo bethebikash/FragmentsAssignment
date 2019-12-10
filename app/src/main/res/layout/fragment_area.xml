@@ -9,6 +9,7 @@
     <EditText
         android:id="@+id/etRadius"
         android:layout_width="match_parent"
+        android:inputType="numberDecimal"
         android:hint="Enter the radius"
         android:layout_height="wrap_content"
         android:textSize="20sp" />
@@ -19,6 +20,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Area of Circle"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:textSize="20sp" />
 
 </LinearLayout>
