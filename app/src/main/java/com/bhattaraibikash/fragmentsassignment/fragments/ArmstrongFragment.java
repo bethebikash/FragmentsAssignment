@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bhattaraibikash.fragmentsassignment.R;
@@ -20,6 +21,7 @@ import com.bhattaraibikash.fragmentsassignment.R;
 public class ArmstrongFragment extends Fragment implements View.OnClickListener {
 
     private EditText etNumberAr;
+    private TextView tvArmstrong;
     private Button btnCheckArmstrong;
 
     public ArmstrongFragment() {
@@ -33,6 +35,7 @@ public class ArmstrongFragment extends Fragment implements View.OnClickListener 
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_armstrong, container, false);
         etNumberAr = view.findViewById(R.id.etNumberAr);
+        tvArmstrong = view.findViewById(R.id.tvArmstrong);
         btnCheckArmstrong = view.findViewById(R.id.btnCheckArmstrong);
 
         btnCheckArmstrong.setOnClickListener(this);
@@ -42,20 +45,23 @@ public class ArmstrongFragment extends Fragment implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        int num = Integer.parseInt(etNumberAr.getText().toString());
-        int initialNum = num;
-        int r;
-        int sum = 0;
-        while(num > 0)
-        {
-            r=num%10;
-            sum = sum+(r*r*r);
-            num = num/10;
-        }
-        if(initialNum == sum) {
-            Toast.makeText(getActivity(), "The number is Armstrong Number", Toast.LENGTH_SHORT).show();
+        if(etNumberAr.getText().toString().isEmpty()){
+            etNumberAr.setError("enter the number!");
         } else {
-            Toast.makeText(getActivity(), "The number is not Armstrong Number", Toast.LENGTH_SHORT).show();
+            int num = Integer.parseInt(etNumberAr.getText().toString());
+            int initialNum = num;
+            int r;
+            int sum = 0;
+            while (num > 0) {
+                r = num % 10;
+                sum = sum + (r * r * r);
+                num = num / 10;
+            }
+            if (initialNum == sum) {
+                tvArmstrong.setText(initialNum+" is an Armstrong Number");
+            } else {
+                tvArmstrong.setText(initialNum+" is not an Armstrong Number");
+            }
         }
     }
 }
