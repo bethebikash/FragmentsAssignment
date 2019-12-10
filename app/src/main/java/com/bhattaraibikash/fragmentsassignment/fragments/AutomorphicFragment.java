@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -20,6 +21,7 @@ public class AutomorphicFragment extends Fragment implements View.OnClickListene
 
     private EditText etNumberAu;
     private Button btnCheckAutomorphic;
+    private TextView tvAutomorphic;
 
     public AutomorphicFragment() {
         // Required empty public constructor
@@ -32,6 +34,7 @@ public class AutomorphicFragment extends Fragment implements View.OnClickListene
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_automorphic, container, false);
         etNumberAu = view.findViewById(R.id.etNumberAu);
+        tvAutomorphic = view.findViewById(R.id.tvAutomorphic);
         btnCheckAutomorphic = view.findViewById(R.id.btnCheckAutomorphic);
 
         btnCheckAutomorphic.setOnClickListener(this);
@@ -41,17 +44,20 @@ public class AutomorphicFragment extends Fragment implements View.OnClickListene
     @Override
     public void onClick(View v) {
 
-        int num = Integer.parseInt(etNumberAu.getText().toString());
-        int sqNum = num * num;
-
-        String strNum = Integer.toString(num);
-        String strSqNumber = Integer.toString(sqNum);
-
-        if (strSqNumber.endsWith(strNum)) {
-            Toast.makeText(getActivity(), "It an Automorphic Number", Toast.LENGTH_SHORT).show();
+        if(etNumberAu.getText().toString().isEmpty()){
+            etNumberAu.setError("enter the number!");
         } else {
-            Toast.makeText(getActivity(), "Not an Automorphic Number", Toast.LENGTH_SHORT).show();
-        }
+            int num = Integer.parseInt(etNumberAu.getText().toString());
+            int sqNum = num * num;
 
+            String strNum = Integer.toString(num);
+            String strSqNumber = Integer.toString(sqNum);
+
+            if (strSqNumber.endsWith(strNum)) {
+                tvAutomorphic.setText(num+" is an Automorphic Number");
+            } else {
+                tvAutomorphic.setText(num+" is not an Automorphic Number");
+            }
+        }
     }
 }
