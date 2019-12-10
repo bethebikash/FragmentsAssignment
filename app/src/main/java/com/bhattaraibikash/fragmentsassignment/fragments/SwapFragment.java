@@ -2,15 +2,14 @@ package com.bhattaraibikash.fragmentsassignment.fragments;
 
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.bhattaraibikash.fragmentsassignment.R;
 
@@ -20,6 +19,7 @@ import com.bhattaraibikash.fragmentsassignment.R;
 public class SwapFragment extends Fragment implements View.OnClickListener {
 
     private EditText etFirstNum, etSecondNum;
+    private TextView tvSwap;
     private Button btnSwap;
 
     public SwapFragment() {
@@ -30,7 +30,8 @@ public class SwapFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_swap, container, false);
+        View view = inflater.inflate(R.layout.fragment_swap, container, false);
+        tvSwap = view.findViewById(R.id.tvSwap);
         etFirstNum = view.findViewById(R.id.etFirstNum);
         etSecondNum = view.findViewById(R.id.etSecondNum);
         btnSwap = view.findViewById(R.id.btnSwap);
@@ -41,13 +42,20 @@ public class SwapFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int fNum = Integer.parseInt(etFirstNum.getText().toString());
-        int sNum = Integer.parseInt(etSecondNum.getText().toString());
+        if (etFirstNum.getText().toString().isEmpty()) {
+            etFirstNum.setError("enter first number!");
+        } else if (etSecondNum.getText().toString().isEmpty()) {
+            etSecondNum.setError("enter second number!");
+        } else {
+            int fNum = Integer.parseInt(etFirstNum.getText().toString());
+            int sNum = Integer.parseInt(etSecondNum.getText().toString());
 
-        fNum=fNum+sNum;//a=30 (10+20)
-        sNum=fNum-sNum;//b=10 (30-20)
-        fNum=fNum-sNum;//a=20 (30-10)
+            fNum = fNum + sNum;
+            sNum = fNum - sNum;
+            fNum = fNum - sNum;
 
-        Toast.makeText(getActivity(), "First number is :"+fNum+" Second number is : "+sNum, Toast.LENGTH_SHORT).show();
+            tvSwap.setText("First Number is :" + fNum + "\nSecond Number is :" + sNum);
+
+        }
     }
 }
